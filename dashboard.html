@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrailMind Activity Timeline</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="dashboard-shell">
+    <header class="dashboard-header">
+      <div class="brand-row dashboard-brand">
+        <div class="brand-mark">T</div>
+        <div><h1>TrailMind</h1><p>Your web activity, remembered clearly.</p></div>
+      </div>
+      <div class="header-actions">
+        <button id="replayProcess" class="replay-button">▶ Replay process</button>
+        <button id="exportCsv" class="ghost-button">Export CSV</button>
+        <button id="exportJson" class="ghost-button">Export JSON</button>
+        <button id="openSettings" class="icon-button" aria-label="Settings" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <section class="hero-panel">
+      <div>
+        <span class="eyebrow" id="dateEyebrow">TODAY</span>
+        <h2 id="greeting">Here’s what you explored.</h2>
+        <p>Your timeline is stored locally on this browser.</p>
+      </div>
+      <div class="hero-metric"><strong id="totalFocus">0m</strong><span>focused time</span></div>
+    </section>
+
+    <section class="metric-grid">
+      <article><span>Visits</span><strong id="metricVisits">0</strong><small id="visitTrend">in selected range</small></article>
+      <article><span>Websites</span><strong id="metricSites">0</strong><small>unique domains</small></article>
+      <article><span>Process steps</span><strong id="metricInteractions">0</strong><small>ordered actions recorded</small></article>
+      <article><span>Most visited</span><strong id="metricTopSite" class="site-metric">—</strong><small id="topSiteVisits">No activity yet</small></article>
+    </section>
+
+    <section class="toolbar">
+      <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search website, URL, note, or process step…"></div>
+      <select id="dateFilter" aria-label="Date range">
+        <option value="today">Today</option>
+        <option value="7">Last 7 days</option>
+        <option value="30">Last 30 days</option>
+        <option value="all">All time</option>
+      </select>
+      <select id="siteFilter" aria-label="Website"><option value="all">All websites</option></select>
+      <button id="favoritesFilter" class="filter-button" aria-pressed="false">☆ Favorites</button>
+    </section>
+
+    <div class="content-grid">
+      <section class="timeline-panel">
+        <div class="section-heading"><div><span class="eyebrow">MEMORY STREAM</span><h3>Activity timeline</h3></div><span id="resultCount" class="result-count">0 entries</span></div>
+        <div id="timeline" class="timeline"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div class="empty-icon">⌁</div><h3>No memories here yet</h3><p>Browse normally and TrailMind will build your private timeline.</p>
+        </div>
+      </section>
+
+      <aside class="insight-panel">
+        <span class="eyebrow">TOP SITES</span>
+        <h3>Where your time went</h3>
+        <div id="siteBreakdown" class="site-breakdown"></div>
+        <div class="privacy-card"><span>◉</span><div><strong>Private by design</strong><p>No cloud sync. No typed content. No browsing data leaves your browser.</p></div></div>
+      </aside>
+    </div>
+  </main>
+
+  <dialog id="noteDialog">
+    <form method="dialog" class="dialog-card">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <span class="eyebrow">MEMORY NOTE</span>
+      <h3>Add context to this visit</h3>
+      <p id="dialogPageTitle"></p>
+      <textarea id="dialogNote" maxlength="500" rows="5" placeholder="What did you accomplish, learn, or decide?"></textarea>
+      <div class="dialog-actions"><button value="cancel" class="ghost-button">Cancel</button><button id="dialogSave" value="default" class="primary-button">Save memory</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card settings-card">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <span class="eyebrow">SETTINGS</span><h3>Privacy & storage</h3>
+      <label class="setting-row"><div><strong>Track browsing activity</strong><small>Record visited pages and focused time</small></div><input id="settingTracking" type="checkbox"></label>
+      <label class="setting-row"><div><strong>Activity counters</strong><small>Count clicks, key actions, and scroll depth—never typed text</small></div><input id="settingActivity" type="checkbox"></label>
+      <label class="setting-row"><div><strong>Step-by-step process</strong><small>Remember meaningful links, buttons, menus, and selections in order</small></div><input id="settingSteps" type="checkbox"></label>
+      <label class="field-label">Keep ordinary history for
+        <select id="retentionDays"><option value="30">30 days</option><option value="90">90 days</option><option value="180">180 days</option><option value="365">1 year</option></select>
+      </label>
+      <label class="field-label">Never track these domains
+        <textarea id="excludedDomains" rows="4" placeholder="bank.example.com&#10;private.example.org"></textarea>
+      </label>
+      <p class="settings-hint">One domain per line. Favorites and entries with notes are kept until you delete them.</p>
+      <div class="dialog-actions"><button id="clearData" value="noop" class="danger-button">Clear all data</button><button id="saveSettings" value="default" class="primary-button">Save settings</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="processDialog" class="process-dialog">
+    <div class="dialog-card">
+      <button id="closeProcessDialog" class="dialog-close" aria-label="Close">×</button>
+      <span class="eyebrow">PROCESS REPLAY</span>
+      <h3>Your steps from start to finish</h3>
+      <p id="processDialogSummary">Review the controls and pages you used in exact time order.</p>
+      <ol id="processReplayList" class="process-replay-list"></ol>
+      <div id="processReplayEmpty" class="process-replay-empty" hidden>No process steps match the current filters.</div>
+    </div>
+  </dialog>
+
+  <template id="timelineTemplate">
+    <article class="timeline-item">
+      <div class="timeline-rail"><span class="site-avatar"></span><i></i></div>
+      <div class="memory-card">
+        <div class="memory-topline"><div><span class="site-name"></span><span class="time-label"></span></div><button class="favorite-button" title="Favorite">☆</button></div>
+        <h4 class="page-title"></h4>
+        <a class="page-url" target="_blank" rel="noreferrer"></a>
+        <div class="activity-chips"></div>
+        <button class="process-toggle" hidden aria-expanded="false"><span>▶</span><strong>View process</strong><small></small><b>⌄</b></button>
+        <ol class="process-list" hidden></ol>
+        <p class="memory-note"></p>
+        <div class="memory-actions"><button class="note-button">＋ Add note</button><button class="delete-button" title="Delete this entry">Delete</button></div>
+      </div>
+    </article>
+  </template>
+  <script src="dashboard.js"></script>
+</body>
+</html>

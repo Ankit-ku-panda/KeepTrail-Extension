@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrailMind</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="popup-body">
+  <main class="popup-shell">
+    <header class="brand-row">
+      <div class="brand-mark" aria-hidden="true">T</div>
+      <div>
+        <h1>TrailMind</h1>
+        <p>Your private web memory</p>
+      </div>
+      <label class="switch" title="Pause or resume tracking">
+        <input id="trackingToggle" type="checkbox">
+        <span></span>
+      </label>
+    </header>
+
+    <section id="statusCard" class="status-card">
+      <div class="pulse-dot"></div>
+      <div>
+        <strong id="statusTitle">Remembering this page</strong>
+        <p id="currentSite">Loading…</p>
+      </div>
+    </section>
+
+    <section class="quick-stats" aria-label="Today's activity">
+      <div><strong id="todayVisits">0</strong><span>visits</span></div>
+      <div><strong id="todaySites">0</strong><span>sites</span></div>
+      <div><strong id="todayTime">0m</strong><span>focused</span></div>
+    </section>
+
+    <section class="recent-process">
+      <div class="recent-process-heading"><strong>Current process</strong><span id="stepCount">0 steps</span></div>
+      <ol id="recentSteps" class="recent-steps"></ol>
+      <p id="noRecentSteps" class="recent-empty">Your meaningful clicks will appear here in order.</p>
+    </section>
+
+    <section class="note-card">
+      <label for="quickNote">What did you do here?</label>
+      <textarea id="quickNote" rows="3" maxlength="500" placeholder="Example: Updated the README and checked open issues"></textarea>
+      <div class="note-footer">
+        <span id="saveState">Saved only on this device</span>
+        <button id="saveNote" class="small-button">Save note</button>
+      </div>
+    </section>
+
+    <button id="openDashboard" class="primary-button">
+      <span>Open activity timeline</span><span aria-hidden="true">→</span>
+    </button>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
