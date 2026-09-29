@@ -2,6 +2,20 @@
 
 TrailMind is a privacy-first Chrome and Edge extension that creates a searchable local timeline of your browsing activity. It remembers the website, page title, exact URL, date, time, focused duration, navigation method, and the meaningful controls you used in their exact order. You can replay your process or attach a note describing what you completed on any page.
 
+## Interface preview
+
+### Activity timeline and process steps
+
+![TrailMind activity timeline with visit statistics, search filters and an expanded process step](docs/images/activity-timeline.png)
+
+*An example browsing session showing visited pages, focused time, navigation labels, activity counters, and an expanded recorded process step. Search, filters, favorites, Process Replay, and CSV/JSON export controls appear above the timeline.*
+
+### Privacy and storage settings
+
+![TrailMind privacy and storage settings](docs/images/privacy-settings.png)
+
+*Controls for browsing tracking, activity counters, step-by-step process capture, history retention, excluded domains, and clearing stored data.*
+
 ## Features
 
 - Timeline grouped by date and website
@@ -43,6 +57,8 @@ Your existing locally stored visit history, notes, and favorites are preserved. 
 ## Privacy model
 
 TrailMind does not send browsing data anywhere. It never stores passwords, uploaded file names, or the text entered into forms. Process memory saves only the visible label of a meaningful control, its time, its type, and the target URL when a link was opened. Activity counters record only the number of click/key interactions and maximum scroll percentage. Browser-protected pages such as `chrome://` and `edge://` cannot be tracked.
+
+**Treat browsing history and exports as private.** Exact URLs, page titles, and visible control labels can themselves contain search terms, account identifiers, or other sensitive information, even without recording typed text. Review screenshots and exported JSON/CSV before sharing, and exclude sensitive domains in Settings.
 
 ## Notes
 
