@@ -6,13 +6,13 @@ TrailMind is a privacy-first Chrome and Edge extension that creates a searchable
 
 ### Activity timeline and process steps
 
-![TrailMind activity timeline with visit statistics, search filters and an expanded process step](docs/images/activity-timeline.png)
+![TrailMind activity timeline with visit statistics, search filters and an expanded process step](/activity-timeline.png)
 
 *An example browsing session showing visited pages, focused time, navigation labels, activity counters, and an expanded recorded process step. Search, filters, favorites, Process Replay, and CSV/JSON export controls appear above the timeline.*
 
 ### Privacy and storage settings
 
-![TrailMind privacy and storage settings](docs/images/privacy-settings.png)
+![TrailMind privacy and storage settings](/privacy-settings.png)
 
 *Controls for browsing tracking, activity counters, step-by-step process capture, history retention, excluded domains, and clearing stored data.*
 
